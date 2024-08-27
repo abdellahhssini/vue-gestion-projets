@@ -12,7 +12,7 @@ export async function addCard(newCard) {
     return response.data._id;
 }
 
-export async function updateCard(_id, updatedCard) {
+export async function editCard(_id, updatedCard) {
     const response = await axios.put(`${API_URL}/cards/edit/${_id}`, updatedCard);
     console.log(response);
     return response.data;

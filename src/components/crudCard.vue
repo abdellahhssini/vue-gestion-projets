@@ -1,15 +1,23 @@
 <template>
     <div class="card premier">
-        <div class="card-header bg-primary text-white">
-            {{ list.name }}
+        <div class="card-header bg-primary text-white" :data-list-id="list._idList">
+            {{ list.name  }}  {{ list._idList }}
         </div>
         <div class="card-body">
-            <div v-for="card in cards" :key="card._id" class="mb-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <input @keyup.enter="updateCard(card._id, $event)" :value="card.contenu" class="form-control"/>
-                    <button @click="deleteCard(card._id)" class="btn btn-primary btn-sm ml-2">DELETE</button>
-                </div>
-            </div>
+            <draggable  :list="cards" 
+                        group="cards"
+                        @start="drag=true"
+                        @end="onCardDrop" 
+                        item-key="_id" class="list-group">
+                <template #item="{element}">
+                    <div :key="element._id" class="mb-2 list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <input @keyup.enter="updateCard(element._id, $event)" :value="element.contenu" class="form-control"/>
+                            <button @click="deleteCard(element._id)" class="btn btn-primary btn-sm ml-2">DELETE</button>
+                        </div>
+                    </div>
+                </template>
+            </draggable>     
         </div>
         <div class="cards">
             <InputCard @new-card="addNewCard" />
@@ -17,8 +25,11 @@
     </div>
 </template>
 <script>
+
 import InputCard from "./InputCard.vue";
-import { getAllCards, addCard, updateCard, deleteCard } from '../api/CardService';
+import { getAllCards, addCard, editCard, deleteCard } from '../api/CardService';
+import draggable from "vuedraggable";
+
 export default {
     name: 'crudCard',
     props: {
@@ -32,12 +43,13 @@ export default {
     data(){
         return {
             cards: [],
+            drag: false,
         }
     },
     async created(){
         try {
-            console.log(this.list);
             this.cards = await getAllCards(this.list._idList);
+            console.log('Cards loaded:',this.cards);
         } catch (error){
             console.error('Error in cards:',error);
         }
@@ -46,10 +58,8 @@ export default {
         async addNewCard(card){
             try{
                 card._idListCard = this.list._idList;
-                console.log(card._idListCard);
                 const cardId = await addCard(card);
                 card._id = cardId;
-                console.log(card);
                 this.cards.push(card);
             } catch (error){
                 console.error('Error adding card ',error);
@@ -58,9 +68,12 @@ export default {
         async updateCard(_cardID, event){
             const cardin = this.cards.findIndex(card => card._id === _cardID);
             if(cardin !== -1){
-                const updatedCard = { ...this.cards[cardin], contenu: event.target.value };
+                const updatedCard = {
+                     ...this.cards[cardin], 
+                     contenu: event.target.value 
+                };
                 try {
-                    await updateCard(_cardID, updatedCard);
+                    await editCard(_cardID, updatedCard);
                     this.cards.splice(cardin, 1, updatedCard);
                 } catch(error){
                     console.error('Error updating card ',error);
@@ -75,10 +88,19 @@ export default {
             } catch (error){
                 console.error('Error deleting card ',error);
             }
+        },
+        onCardDrop (event){
+            const ogEvent = event.originalEvent;
+            const toListId = event.to.getAttribute('data-list-id');
+            
+            console.log(event.to);
+
+            console.log(toListId);
         }
     },
     components: {
-        InputCard
+        InputCard,
+        draggable
     }
 }
 </script>

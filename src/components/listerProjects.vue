@@ -41,7 +41,6 @@
 </template>
 <script>
 import addproject from './addproject.vue';
-import projects from './projects.vue';
 import { getAllProjects , addProject } from '../api/ProjectService';
 import router from '@/router';
 

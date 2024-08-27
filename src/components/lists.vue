@@ -46,10 +46,8 @@ export default {
             try{
                 list._idProject = this.project._idProject;
                 const ListId = await addList(list);
-                console.log(ListId);
                 list._id = ListId;
                 this.lists.push(list);
-                console.log(list);
             } catch (error){
                 console.error('Error adding list ',error);
             }
@@ -64,7 +62,6 @@ export default {
         async affect(){
             try {
                 this.lists = await getAllLists(this.project._idProject);
-                console.log("lists",await getAllLists(this.project._idProject));
             } catch (error){
                 console.error('Error in lists:',error);
             }
