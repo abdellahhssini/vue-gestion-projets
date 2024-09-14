@@ -11,7 +11,10 @@
     "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
     "core-js": "^3.38.1",
+<<<<<<< HEAD
     "js-cookie": "^3.0.5",
+=======
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
     "vue": "^3.2.13",
     "vue-router": "^4.0.13",
     "vuedraggable": "^4.1.0"

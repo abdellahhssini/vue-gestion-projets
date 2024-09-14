@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import lists from "./components/lists.vue";
 import ListerProjects from './components/listerProjects.vue';
+<<<<<<< HEAD
 import Page from './views/page.vue';
 import Login from './components/login.vue';
 import Signup from './components/signup.vue';
@@ -42,6 +43,19 @@ const routes = [
       name: 'lists',
       component: lists
     }] 
+=======
+
+const routes = [
+  {
+    path: '/project',
+    name: 'project',
+    component: ListerProjects
+  },
+  {
+    path: '/lists/:projectId',
+    name: 'lists',
+    component: lists
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
   }
 ];
 

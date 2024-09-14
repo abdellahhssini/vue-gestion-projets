@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="col-sm-4 mb-3">
         <button type="button" class="card special-card" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 100%;">
             <div class="card-body">
@@ -24,6 +25,9 @@
         </div>
     </div>
     
+=======
+    <input @keyup.enter="newProject" v-model="projectName" placeholder="Add a project" />
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 </template>
 <script>
     export default {

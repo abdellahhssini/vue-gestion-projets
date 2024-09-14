@@ -1,6 +1,7 @@
 <template>
     <div class="container mt-4">
         <div class="row mb-3">
+<<<<<<< HEAD
             <div class="col text-bg-primary p-3">
                 <h4 v-if="!isEditingName" @click="toggleEditName" >{{ project.name }}</h4>
                 <input v-else 
@@ -15,6 +16,15 @@
         <div class="row">
             <div v-for="lis in lists" :key="lis._idList" class="col-md-4 mb-3">
                 <crudCard :list=lis @list-deleted="suppressionList"/>
+=======
+            <div class="col">
+                <h4 class="project-name text-dark bg-light">{{ project.name }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div v-for="lis in lists" :key="lis._id" class="col-md-4 mb-3">
+                <crudCard :list=lis />
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
             </div>
         </div>
         <div class="row mt-3">
@@ -29,7 +39,11 @@
 import InList from './InList.vue'; 
 import crudCard from './crudCard.vue'
 import { getAllLists , addList } from '../api/ListService';
+<<<<<<< HEAD
 import { getProjectById, updateProject } from '../api/ProjectService';
+=======
+import { getProjectById } from '../api/ProjectService';
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 export default {
     name: 'lists',
     components:{
@@ -40,8 +54,12 @@ export default {
         return{
             lists:[],
             projectId: this.$route.params.projectId,
+<<<<<<< HEAD
             project: {},
             isEditingName: false,
+=======
+            project: {}
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
         }
     },
     
@@ -54,7 +72,11 @@ export default {
             try{
                 list._idProject = this.project._idProject;
                 const ListId = await addList(list);
+<<<<<<< HEAD
                 list._idList = ListId;
+=======
+                list._id = ListId;
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
                 this.lists.push(list);
             } catch (error){
                 console.error('Error adding list ',error);
@@ -74,6 +96,7 @@ export default {
                 console.error('Error in lists:',error);
             }
         },
+<<<<<<< HEAD
         toggleEditName(){
             this.isEditingName = true;
         },
@@ -101,6 +124,8 @@ export default {
         suppressionList(ListId){
             this.lists = this.lists.filter(list => list._idList !== ListId);
         }
+=======
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
     }
 }
 </script>

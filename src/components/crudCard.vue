@@ -1,5 +1,6 @@
 <template>
     <div class="card premier">
+<<<<<<< HEAD
         <div class="card-header bg-white text-primary d-flex justify-content-between align-items-center" >
             <h5 v-if="!listNameEdited" @click="toeditName" class="mb-0 text-center">{{ list.name  }}</h5>
             <input v-else 
@@ -13,18 +14,30 @@
                     <path d="M 11 -0.03125 C 10.164063 -0.03125 9.34375 0.132813 8.75 0.71875 C 8.15625 1.304688 7.96875 2.136719 7.96875 3 L 4 3 C 3.449219 3 3 3.449219 3 4 L 2 4 L 2 6 L 24 6 L 24 4 L 23 4 C 23 3.449219 22.550781 3 22 3 L 18.03125 3 C 18.03125 2.136719 17.84375 1.304688 17.25 0.71875 C 16.65625 0.132813 15.835938 -0.03125 15 -0.03125 Z M 11 2.03125 L 15 2.03125 C 15.546875 2.03125 15.71875 2.160156 15.78125 2.21875 C 15.84375 2.277344 15.96875 2.441406 15.96875 3 L 10.03125 3 C 10.03125 2.441406 10.15625 2.277344 10.21875 2.21875 C 10.28125 2.160156 10.453125 2.03125 11 2.03125 Z M 4 7 L 4 23 C 4 24.652344 5.347656 26 7 26 L 19 26 C 20.652344 26 22 24.652344 22 23 L 22 7 Z M 8 10 L 10 10 L 10 22 L 8 22 Z M 12 10 L 14 10 L 14 22 L 12 22 Z M 16 10 L 18 10 L 18 22 L 16 22 Z"/>
                 </svg>
             </button>
+=======
+        <div class="card-header bg-primary text-white" :data-list-id="list._idList">
+            {{ list.name  }}  {{ list._idList }}
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
         </div>
         <div class="card-body">
             <draggable  :list="cards" 
                         group="cards"
                         @start="drag=true"
+<<<<<<< HEAD
                         @add="onCardDrop" 
+=======
+                        @end="onCardDrop" 
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
                         item-key="_id" class="list-group">
                 <template #item="{element}">
                     <div :key="element._id" class="mb-2 list-group-item">
                         <div class="d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
                             <h6 v-if="!cardedited" @click="toeditCard">{{ element.contenu }}</h6>
                             <input v-else @keyup.enter="updateCard(element._id, $event)" @keydown.esc="cancelEditCard" :value="element.contenu" class="form-control"/>
+=======
+                            <input @keyup.enter="updateCard(element._id, $event)" :value="element.contenu" class="form-control"/>
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
                             <button @click="deleteCard(element._id)" class="btn btn-primary btn-sm ml-2">DELETE</button>
                         </div>
                     </div>
@@ -34,7 +47,10 @@
         <div class="cards">
             <InputCard @new-card="addNewCard" />
         </div>
+<<<<<<< HEAD
         
+=======
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
     </div>
 </template>
 <script>
@@ -42,7 +58,10 @@
 import InputCard from "./InputCard.vue";
 import { getAllCards, addCard, editCard, deleteCard } from '../api/CardService';
 import draggable from "vuedraggable";
+<<<<<<< HEAD
 import { deleteListCard, updateListCard } from "@/api/ListService";
+=======
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 
 export default {
     name: 'crudCard',
@@ -58,8 +77,11 @@ export default {
         return {
             cards: [],
             drag: false,
+<<<<<<< HEAD
             listNameEdited: false,
             cardedited: false
+=======
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
         }
     },
     async created(){
@@ -95,7 +117,10 @@ export default {
                     console.error('Error updating card ',error);
                 }
             }
+<<<<<<< HEAD
             this.cardedited = false;
+=======
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
         },
         async deleteCard(_cardID) {
             try {
@@ -106,6 +131,7 @@ export default {
                 console.error('Error deleting card ',error);
             }
         },
+<<<<<<< HEAD
         async onCardDrop (event){
             const { newIndex } = event;
             const draggedCard = this.cards[newIndex];
@@ -158,6 +184,15 @@ export default {
             } catch (error) {
                 console.error('Error deleting List:', error);
             }
+=======
+        onCardDrop (event){
+            const ogEvent = event.originalEvent;
+            const toListId = event.to.getAttribute('data-list-id');
+            
+            console.log(event.to);
+
+            console.log(toListId);
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
         }
     },
     components: {
@@ -185,6 +220,7 @@ export default {
         padding-bottom: 1rem;
         margin-bottom: 0.5rem;
     }
+<<<<<<< HEAD
     .btn-icon {
         background: none;
         border: none;
@@ -196,4 +232,7 @@ export default {
     .btn-icon svg {
         fill: currentColor;
     }
+=======
+    
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 </style>

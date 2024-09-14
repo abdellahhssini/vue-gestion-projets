@@ -2,6 +2,7 @@
     <!--Lister les projets-->
     <div class="container">
         <div class="row">
+<<<<<<< HEAD
             <div class="col-sm-4 mb-3" v-for="project in projects" :key="project._idProject">
                 <div class="card-container position-relative">
                     <router-link  :to="{ name: 'lists', params: { projectId: project._idProject } }" class="card" style="width: 100%;">
@@ -15,16 +16,58 @@
                 </div>   
             </div>
             <addproject @new-project="addNewProject"/>
+=======
+                <div class="col-sm-4 mb-3" v-for="project in projects" :key="project._idProject">
+                    <div v-if=project._idProject>
+                        <router-link  :to="{ name: 'lists', params: { projectId: project._idProject } }" class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.name }}</h5>
+                            </div>
+                        </router-link>
+                    </div>   
+                </div>
+            <div class="col-sm-4 mb-3">
+                <button type="button" class="card special-card" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Create New Project</h5>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--Modal Du Creation-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Project : </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <addproject @new-project="addNewProject"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" >Save</button>
+                </div>
+            </div>
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
         </div>
     </div>
 </template>
 <script>
 import addproject from './addproject.vue';
+<<<<<<< HEAD
 import { getAllProjects , addProject, deleteProject } from '../api/ProjectService';
+=======
+import { getAllProjects , addProject } from '../api/ProjectService';
+import router from '@/router';
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 
 export default {
     name: 'listerProjects',
     components:{
+<<<<<<< HEAD
         addproject
     },
     props: {
@@ -46,6 +89,23 @@ export default {
             try {
                 project._idUser = this.userId;
                 project._idProject = await addProject(project);
+=======
+        projects,
+        addproject
+    },
+    data(){
+        return{
+            projects:[],
+            _idUs: '66ab7657765774cc5c93b4e9',
+        }
+    },
+    methods:{
+        async addNewProject(project){
+            try {
+                project._idUser = this._idUs;
+                const idProject = await addProject(project);
+                project._id = idProject;
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
                 this.projects.push(project);
             } catch (error){
                 console.error('Error adding project ',error);
@@ -53,6 +113,7 @@ export default {
         },
         async getprojects(){
             try {
+<<<<<<< HEAD
                 console.log(this.userId);
                 this.projects = await getAllProjects(this.userId);
             } catch (error){
@@ -69,6 +130,17 @@ export default {
         }
     },
     
+=======
+                this.projects = await getAllProjects(this._idUs);
+            } catch (error){
+                console.error('Error in projects:',error);
+            }
+        }
+    },
+    mounted() {
+        this.getprojects();
+    }
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 }
 </script>
 <style>

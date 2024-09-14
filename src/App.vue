@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <router-view />
 </template>
 
@@ -11,6 +12,35 @@ export default {
   components:{
     Login
   }
+=======
+  <!--navbar navbar-expand-lg bg-body-tertiary -->
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+      <a class="navbar-brand" href="#">Project Management</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/project">Projects</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <router-view />
+  </body>
+    
+</template>
+
+<script>
+export default {
+  name: 'App',
+  
+>>>>>>> 6e920ba81ed350f0aa8415354139f72ac41904f9
 }
 </script>
 
